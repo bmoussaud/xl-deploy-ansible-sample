@@ -1,0 +1,5 @@
+tomcat_version: 7.0.56
+tomcat_dir: /usr/share/tomcat7
+tomcat_user: tomcat7
+tomcat_group: tomcat7
+

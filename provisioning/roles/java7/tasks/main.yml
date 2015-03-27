@@ -1,0 +1,6 @@
+---
+
+  - name: install Java
+    apt:
+      name=openjdk-7-jdk
+      state=present

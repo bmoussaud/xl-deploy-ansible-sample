@@ -1,0 +1,6 @@
+---
+- hosts: all
+  roles:
+    - tomcat7
+  sudo: true
+
