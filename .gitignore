@@ -1,4 +1,5 @@
 vagrant/
 vagrant/.vagrant/
 .vagrant/machines/
+.vagrant/provisioners
 
