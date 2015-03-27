@@ -1,0 +1,43 @@
+---
+
+- name: Define node in XLD
+  xldeploy.py:
+    id: "Infrastructure/{{ ansible_eth1.ipv4.address }}.vm"
+    type: overthere.SshHost
+    endpoint: "{{ xld_endpoint}}"
+    properties:
+      os: UNIX
+      address: "{{ ansible_eth1.ipv4.address }}"
+      username: vagrant
+      password: vagrant
+      connectionType: INTERACTIVE_SUDO
+      sudoUsername: root
+      stagingDirectoryPath: /tmp
+
+- name : Define tomcat server in XLD
+  xldeploy.py:
+    id: "Infrastructure/{{ ansible_eth1.ipv4.address }}.vm/tomcat"
+    type: tomcat.Server
+    endpoint: "{{ xld_endpoint}}"
+    properties:
+      home: /var/lib/tomcat7
+      startCommand: /etc/init.d/tomcat7 start
+      stopCommand: /etc/init.d/tomcat7 stop
+      startWaitTime: 10
+      stopWaitTime: 0
+
+- name : Define tomcat virtual host in XLD
+  xldeploy.py:
+    id: "Infrastructure/{{ ansible_eth1.ipv4.address }}.vm/tomcat/tomcat.vh"
+    type: tomcat.VirtualHost
+    endpoint: "{{ xld_endpoint}}"
+
+- name: Define the test environment
+  xldeploy.py:
+    id: Environments/ansible-tomcat-test
+    type: udm.Environment
+    endpoint: "{{ xld_endpoint}}"
+    properties:
+      members: ["Infrastructure/{{ ansible_eth1.ipv4.address }}.vm/tomcat/tomcat.vh", "Infrastructure/{{ ansible_eth1.ipv4.address }}.vm/tomcat","Infrastructure/{{ ansible_eth1.ipv4.address }}.vm"]
+
+

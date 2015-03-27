@@ -16,6 +16,8 @@ Vagrant.configure("2") do |config|
   nodes.each do |node|
     config.vm.define node[:hostname] do |node_config|
 
+      #node_config.vbguest.auto_update = false
+
       node_config.vm.box = node[:box]
       node_config.vm.host_name = node[:hostname] + '.' + domain
       node_config.vm.network :private_network, ip: node[:ip]
@@ -33,7 +35,7 @@ Vagrant.configure("2") do |config|
   config.vm.provision "ansible" do |ansible|
     ansible.playbook = "provisioning/playbook.yml"
     #ansible.inventory_path = "provisioning/hosts-vagrant"
-    ansible.verbose = false
+    ansible.verbose = 'v' # 'v','vv','vvv','vvvv'
     ansible.groups = {
       "tomcat" => ["tomcat1","tomcat2","tomcat3"],
       "db" => ["dbqa","dbprod"],

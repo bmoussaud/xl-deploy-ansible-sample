@@ -4,7 +4,6 @@
   sudo: True
   apt: pkg=tomcat7 state=latest update-cache=yes force=yes
 
-
 - name: enable tomcat service
   action: service name=tomcat7 state=started enabled=yes
 
