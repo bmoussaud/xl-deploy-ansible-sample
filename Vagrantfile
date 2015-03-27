@@ -7,8 +7,8 @@ nodes = [
   { :hostname => 'dbprod', :ip => '10.0.0.205', :box => 'ubuntu-1304-puppet-mysql', :ram => 512 },
 
   { :hostname => 'tomcat1', :ip => '10.0.0.101', :box => 'spantree/ubuntu-precise-64', :ram => 1024},
-  { :hostname => 'tomcat2', :ip => '10.0.0.102', :box => 'ubuntu-1304-puppet-java', :ram => 1024 },
-  { :hostname => 'tomcat3', :ip => '10.0.0.103', :box => 'ubuntu-1304-puppet-java', :ram => 1024 },
+  { :hostname => 'tomcat2', :ip => '10.0.0.102', :box => 'spantree/ubuntu-precise-64', :ram => 1024 },
+  { :hostname => 'tomcat3', :ip => '10.0.0.103', :box => 'spantree/ubuntu-precise-64', :ram => 1024 },
 ]
 
 # http://superuser.com/questions/144453/virtualbox-guest-os-accessing-local-server-on-host-os wget http://10.0.2.2:4516
