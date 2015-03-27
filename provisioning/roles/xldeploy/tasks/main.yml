@@ -32,6 +32,19 @@
     type: tomcat.VirtualHost
     endpoint: "{{ xld_endpoint}}"
 
+- name: Define the smoke test runner
+  xldeploy.py:
+    id: "Infrastructure/{{ ansible_eth1.ipv4.address }}.vm/test-runner-{{ ansible_hostname }}"
+    type: smoketest.Runner
+    endpoint: "{{ xld_endpoint}}"
+
+- name: Define the dictionary for the node
+  xldeploy.py:
+    id: "Environments/{{ ansible_hostname }}.dict"
+    type: udm.Dictionary
+    endpoint: "{{ xld_endpoint}}"
+    properties:
+      entries: {'log.RootLevel':'ERROR', 'log.FilePath':'/tmp/null', 'tomcat.port':'8080','tomcat.DataSource.username':'scott','tomcat.DataSource.password':'tiger','TITLE':'ANSIBLE', 'tomcat.DataSource.driverClassName':'com.mysql.jdbc.Driver','tomcat.DataSource.url':'jdbc:mysql://localhost/petclinic', 'tomcat.DataSource.context':'petclinic','tests2.ExecutedHttpRequestTest.url':'http://localhost:8080/petclinic/index.jsp'}
 - name: Define the test environment
   xldeploy.py:
     id: Environments/ansible-tomcat-test
@@ -39,6 +52,7 @@
     endpoint: "{{ xld_endpoint}}"
     update_mode: add
     properties:
-      members: ["Infrastructure/{{ ansible_eth1.ipv4.address }}.vm/tomcat/tomcat.vh", "Infrastructure/{{ ansible_eth1.ipv4.address }}.vm/tomcat","Infrastructure/{{ ansible_eth1.ipv4.address }}.vm"]
+      members: ["Infrastructure/{{ ansible_eth1.ipv4.address }}.vm/tomcat/tomcat.vh", "Infrastructure/{{ ansible_eth1.ipv4.address }}.vm/tomcat","Infrastructure/{{ ansible_eth1.ipv4.address }}.vm", "Infrastructure/{{ ansible_eth1.ipv4.address }}.vm/test-runner-{{ ansible_hostname }}"]
+      dictionaries: ["Environments/{{ ansible_hostname }}.dict"]
 
 
