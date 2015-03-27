@@ -37,6 +37,7 @@
     id: Environments/ansible-tomcat-test
     type: udm.Environment
     endpoint: "{{ xld_endpoint}}"
+    update_mode: add
     properties:
       members: ["Infrastructure/{{ ansible_eth1.ipv4.address }}.vm/tomcat/tomcat.vh", "Infrastructure/{{ ansible_eth1.ipv4.address }}.vm/tomcat","Infrastructure/{{ ansible_eth1.ipv4.address }}.vm"]
 
