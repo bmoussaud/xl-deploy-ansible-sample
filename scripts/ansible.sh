@@ -1,7 +1,7 @@
 
 function do_main() {
     install_package ansible
-    install_package openjdk-7-jdk
+    #install_package openjdk-7-jdk
 }
 
 

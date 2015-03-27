@@ -1,0 +1,4 @@
+---
+- name: restart tomcat
+  action: service name=tomcat7 state=restarted enabled=yes
+

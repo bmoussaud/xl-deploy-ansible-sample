@@ -1,6 +1,10 @@
 ---
+- name: Add JRE ppa
+  apt_repository: repo=ppa:webupd8team/java state=present
 
-  - name: install Java
-    apt:
-      name=openjdk-7-jdk
-      state=present
+- name: Automatically select the Oracle License
+  shell: echo debconf shared/accepted-oracle-license-v1-1 select true | sudo debconf-set-selections
+
+- name: Install JRE
+  apt: pkg=oracle-java7-installer state=latest update-cache=yes force=yes
+
