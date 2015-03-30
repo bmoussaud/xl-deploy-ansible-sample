@@ -112,6 +112,7 @@ class ConfigurationItem:
         return self.id == other.id and self.type == other.type and self.properties == other.properties
 
     def __contains__(self, item):
+        print "###################################################### %s "% item
         # TODO: use DictDiffer https://github.com/hughdbrown/dictdiffer/blob/master/dictdiffer/__init__.py
         # TODO: manage Password
 
@@ -119,8 +120,8 @@ class ConfigurationItem:
             return False
         if not self.type == item.type:
             return False
-        if not len(self.properties) == len(item.properties):
-            return False
+        #if not len(self.properties) == len(item.properties):
+        #    return False
 
         for k, v in item.properties.iteritems():
             # return false unless is.has_key? k and is[k]==@should.first[k].to_s
