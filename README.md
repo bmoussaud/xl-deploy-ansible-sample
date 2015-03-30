@@ -1,13 +1,10 @@
-xldeploy-puppet-sample
-======================
+# xldeploy-ansible-sample #
 
-This project shows how to integrate XL Deploy and Ansible using Vagrant images.
+This project shows how to integrate [XL Deploy](https://xebialabs.com/products/xl-deploy/) and [Ansible](http://www.ansible.com) using Vagrant images.
 
+## Web Machines ##
 
-
-# Web Machine #
-
-3 instances (tomcat1, tomcat2, tomcat3) can be created and automaticaly defined in XLD and added
+3 instances (tomcat1, tomcat2, tomcat3) including tomcat servers can be created by Ansble and automaticaly defined in XLD and added
 into an environment
 
 Exemple:
@@ -15,9 +12,6 @@ Exemple:
 `$vagrant up tomcat2` 
 
 ```
-.....
-.....
-.....
 .....
 ==> tomcat2: Running provisioner: ansible...
 ANSIBLE_FORCE_COLOR=true ANSIBLE_HOST_KEY_CHECKING=false PYTHONUNBUFFERED=1 ansible-playbook --private-key=/Users/bmoussaud/.vagrant.d/insecure_private_key --user=vagrant --limit='tomcat2' --inventory-file=/Users/bmoussaud/Workspace/xebialabs/demos/4.5.0/xl-deploy-ansible-sample/.vagrant/provisioners/ansible/inventory -v provisioning/playbook.yml
@@ -58,3 +52,30 @@ PLAY RECAP ********************************************************************
 tomcat2                    : ok=9    changed=6    unreachable=0    failed=0
 ```
 
+## DB Machines ##
+
+2 instances (dbprod, dbqa) including MySql servers can be created by Ansble and automaticaly defined in XLD and added
+into an environment
+
+
+```
+....
+TASK: [xldeploydb | XLD Infrastructure/ANSIBLE] *******************************
+ok: [dbqa] => {"changed": false}
+
+TASK: [xldeploydb | XLD Environments/ANSIBLE] *********************************
+ok: [dbqa] => {"changed": false}
+
+TASK: [xldeploydb | XLD Define Host] ******************************************
+changed: [dbqa] => {"changed": true, "msg": "Create Infrastructure/ANSIBLE/dbqa.xebialabs.demo.vm overthere.SshHost {u'username': u'vagrant', u'address': u'dbqa.xebialabs.demo', u'connectionType': u'INTERACTIVE_SUDO', u'stagingDirectoryPath': u'/tmp', u'sudoUsername': u'root', u'password': '********', u'os': u'UNIX'}"}
+
+TASK: [xldeploydb | XLD Define Mysql] *****************************************
+changed: [dbqa] => {"changed": true, "msg": "Create Infrastructure/ANSIBLE/dbqa.xebialabs.demo.vm/mysql sql.MySqlClient {u'username': u'root', u'password': '********', u'databaseName': u'petdb'}"}
+
+TASK: [xldeploydb | XLD add the db to test environment] ***********************
+changed: [dbqa] => {"changed": true, "msg": "[ADD] Update Environments/ANSIBLE/ansible-tomcat-test udm.Environment {u'members': [u'Infrastructure/ANSIBLE/dbqa.xebialabs.demo.vm/mysql']}, previous Environments/ANSIBLE/ansible-tomcat-test udm.Environment {'triggers': [], 'requiresChangeTicketNumber': 'false', 'dictionaries': ['Environments/ANSIBLE/tomcat1.dict', 'Environments/ANSIBLE/tomcat2.dict'], 'requiresReleaseNotes': 'false', 'requiresPerformanceTested': 'false', 'members': ['Infrastructure/ANSIBLE/tomcat2.xebialabs.demo.vm/tomcat/tomcat.vh', 'Infrastructure/ANSIBLE/tomcat1.xebialabs.demo.vm/tomcat/tomcat.vh', 'Infrastructure/ANSIBLE/tomcat2.xebialabs.demo.vm/tomcat', 'Infrastructure/ANSIBLE/tomcat1.xebialabs.demo.vm', 'Infrastructure/ANSIBLE/tomcat1.xebialabs.demo.vm/tomcat', 'Infrastructure/ANSIBLE/tomcat2.xebialabs.demo.vm', 'Infrastructure/ANSIBLE/dbprod.xebialabs.demo.vm/mysql', 'Infrastructure/ANSIBLE/tomcat1.xebialabs.demo.vm/test-runner-tomcat1', 'Infrastructure/ANSIBLE/tomcat2.xebialabs.demo.vm/test-runner-tomcat2'], 'backupDirectory': '/tmp'}"}
+
+PLAY RECAP ********************************************************************
+dbqa                       : ok=7    changed=4    unreachable=0    failed=0
+
+``
