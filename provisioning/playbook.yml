@@ -1,7 +1,12 @@
 ---
-- hosts: all
+- hosts: web
   roles:
     #- tomcat7
     - xldeploy
+  sudo: true
+- hosts: db
+  roles:
+    - mysql
+    - xldeploydb
   sudo: true
 

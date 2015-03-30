@@ -1,0 +1,7 @@
+---
+
+- name: Install Mysql
+  sudo: True
+  apt: pkg=mysql-server-5.6 state=latest update-cache=yes force=yes
+
+

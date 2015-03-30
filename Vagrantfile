@@ -3,8 +3,8 @@
 domain = 'xebialabs.demo'
 
 nodes = [
-  { :hostname => 'dbqa', :ip => '10.0.0.204', :box => 'ubuntu-1304-puppet-mysql', :ram => 512 },
-  { :hostname => 'dbprod', :ip => '10.0.0.205', :box => 'ubuntu-1304-puppet-mysql', :ram => 512 },
+  { :hostname => 'dbqa', :ip => '10.0.0.204', :box => 'spantree/ubuntu-precise-64', :ram => 512 },
+  { :hostname => 'dbprod', :ip => '10.0.0.205', :box => 'spantree/ubuntu-precise-64', :ram => 512 },
 
   { :hostname => 'tomcat1', :ip => '10.0.0.101', :box => 'spantree/ubuntu-precise-64', :ram => 1024},
   { :hostname => 'tomcat2', :ip => '10.0.0.102', :box => 'spantree/ubuntu-precise-64', :ram => 1024 },
@@ -37,7 +37,7 @@ Vagrant.configure("2") do |config|
     #ansible.inventory_path = "provisioning/hosts-vagrant"
     ansible.verbose = 'v' # 'v','vv','vvv','vvvv'
     ansible.groups = {
-      "tomcat" => ["tomcat1","tomcat2","tomcat3"],
+      "web" => ["tomcat1","tomcat2","tomcat3"],
       "db" => ["dbqa","dbprod"],
     }
   end

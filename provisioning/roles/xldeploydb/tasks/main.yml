@@ -1,0 +1,47 @@
+---
+- name : XLD Infrastructure/ANSIBLE
+  xldeploy.py:
+    id: "Infrastructure/ANSIBLE"
+    type: core.Directory
+    endpoint: "{{ xld_endpoint}}"
+
+- name : XLD Environments/ANSIBLE
+  xldeploy.py:
+    id: "Environments/ANSIBLE"
+    type: core.Directory
+    endpoint: "{{ xld_endpoint}}"
+
+- name: XLD Define Host
+  xldeploy.py:
+    id: "Infrastructure/ANSIBLE/{{ ansible_fqdn }}.vm"
+    type: overthere.SshHost
+    endpoint: "{{ xld_endpoint}}"
+    properties:
+      os: UNIX
+      address: "{{ ansible_fqdn }}"
+      username: vagrant
+      password: vagrant
+      connectionType: INTERACTIVE_SUDO
+      sudoUsername: root
+      stagingDirectoryPath: /tmp
+
+- name : XLD Define Mysql
+  xldeploy.py:
+    id: "Infrastructure/ANSIBLE/{{ ansible_fqdn }}.vm/mysql"
+    type: sql.MySqlClient
+    endpoint: "{{ xld_endpoint}}"
+    properties:
+      databaseName: petdb
+      username: root
+      password: tiger
+
+- name: XLD add the db to test environment
+  xldeploy.py:
+    id: Environments/ANSIBLE/ansible-tomcat-test
+    type: udm.Environment
+    endpoint: "{{ xld_endpoint}}"
+    update_mode: add
+    properties:
+      members: ["Infrastructure/ANSIBLE/{{ ansible_fqdn }}.vm/mysql"]
+
+
