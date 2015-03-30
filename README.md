@@ -4,7 +4,7 @@ This project shows how to integrate [XL Deploy](https://xebialabs.com/products/x
 
 ## Web Machines ##
 
-3 instances (tomcat1, tomcat2, tomcat3) including tomcat servers can be created by Ansble and automaticaly defined in XLD and added
+3 instances (tomcat1, tomcat2, tomcat3) including tomcat servers can be created by Ansible and automaticaly defined in XLD and added
 into an environment
 
 Exemple:
@@ -54,9 +54,10 @@ tomcat2                    : ok=9    changed=6    unreachable=0    failed=0
 
 ## DB Machines ##
 
-2 instances (dbprod, dbqa) including MySql servers can be created by Ansble and automaticaly defined in XLD and added
+2 instances (dbprod, dbqa) including MySql servers can be created by Ansible and automaticaly defined in XLD and added
 into an environment
 
+`$vagrant up dbqa` 
 
 ```
 ....
