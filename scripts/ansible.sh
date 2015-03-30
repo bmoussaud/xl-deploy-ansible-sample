@@ -2,8 +2,8 @@
 function do_main() {
     install_package ansible
     # pre-install package for offline demo
-    install_package openjdk-7-jre
-    install_package tomcat7
+    #install_package openjdk-7-jre
+    #install_package tomcat7
 }
 
 

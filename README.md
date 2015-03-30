@@ -1,4 +1,4 @@
-# xldeploy-ansible-sample #
+# XLDeploy Ansible Demo #
 
 This project shows how to integrate [XL Deploy](https://xebialabs.com/products/xl-deploy/) and [Ansible](http://www.ansible.com) using Vagrant images.
 
