@@ -2,6 +2,7 @@
 
 This project shows how to integrate [XL Deploy](https://xebialabs.com/products/xl-deploy/) and [Ansible](http://www.ansible.com) using Vagrant images.
 
+
 ## Web Machines ##
 
 3 instances (tomcat1, tomcat2, tomcat3) including tomcat servers can be created by Ansible and automaticaly defined in XLD and added
