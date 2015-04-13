@@ -18,7 +18,7 @@
     endpoint: "{{ xld_endpoint}}"
     properties:
       os: UNIX
-      address: "{{ ansible_fqdn }}"
+      address: "{{ ansible_eth1.ipv4.address }}"
       username: vagrant
       password: vagrant
       connectionType: INTERACTIVE_SUDO
